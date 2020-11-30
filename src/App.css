@@ -12,8 +12,33 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.main-container{
+  margin: 50px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+}
 
-.App-link {
-  color: #61dafb;
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .main-container{
+    margin: 50px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen 
+and (device-width: 360px) 
+and (device-height: 640px) 
+and (-webkit-device-pixel-ratio: 2) {
+  .main-container{
+    margin: 50px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+  }
 }
 

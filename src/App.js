@@ -1,11 +1,17 @@
 import './App.css';
-import Header from './organism/Header';
+import Header from './molecule/Header';
+import MainContent from './molecule/MainContent';
 
 function App() {
   return (
-    <div>
-      <Header/>
-    </div>
+    <>
+      <header>
+        <Header />
+      </header>
+      <main className="main-container">
+        <MainContent />
+      </main>
+    </>
   );
 }
 
