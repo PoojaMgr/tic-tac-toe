@@ -1,8 +1,19 @@
 .content-cell {
-    background-color: #282c34;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    height: 100px;
-  }
+  background-color: #282c34;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 100px;
+}
+
+.x_style {
+  color: white;
+  font-size: 3rem
+}
+.o_style{
+  color: white;
+  font-size: 3rem
+}
+
+

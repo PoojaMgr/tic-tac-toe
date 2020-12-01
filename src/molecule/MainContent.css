@@ -6,27 +6,42 @@
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 15px;
 }
+.winning-message {
+  display: flex; 
+  position: absolute;
+  flex-direction: column;  
+  left: 0;
+  top: 20vh;
+  bottom: 0;
+  right: 0;
+  overflow: none;
+}
 
-.content-cell {
+.winning-content{
   background-color: #282c34;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  min-width: 30%;
+  min-height: 89%;
+  box-shadow: 0 4px 6px 0 whitesmoke;  
+  font-size: 3rem;
+  color: white;
+}
+.winning-message button {
+  font-size: 3rem;
+  background-color: white;
+  border: 1px solid black;
+  padding: .25em .5em;
   cursor: pointer;
-  height: 100px;
-}
-.x,
-.o {
-  cursor: default;
 }
 
-.x::after {
-  content: '×';
-  font-size: 200px;
+.winning-message button:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
 }
 
-.o::after {
-  content: '○';
-  color: #F2EBD3;
-  font-size: 225px;
+.winning-message.show {
+  display: flex;
 }

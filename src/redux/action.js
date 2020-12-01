@@ -1,11 +1,17 @@
-  
-export const addSymbol = (row, position, symbol) => ({
-    type: 'ADD_SYMBOL',
-    symbol,
-    row,
-    position
-  });
-  
-  export const startAgain = () => ({
-    type: 'START_AGAIN'
-  });
+export const cellposition = () => {
+    return {
+        type: "CELLPOSITION",
+    }
+}
+
+export const xisnext = () => {
+    return {
+        type: "XISNEXT",
+    }
+}
+export const winnerstatus = () => {
+    return {
+        type: "WINNERSTATUS",
+    }
+}
+

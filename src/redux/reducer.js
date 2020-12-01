@@ -1,55 +1,20 @@
-import { X, O } from '../constant';
-import { resultForSymbol } from '../logic/logic';
-import * as _ from 'lodash';
+const initialState = {
+  cellPosition: Array(9).fill(null),
+  xIsNext: false,
+  winnerStatus: ""
+}
 
-export const initialState = {
-  board: {
-    0: ['', '', ''],
-    1: ['', '', ''],
-    2: ['', '', '']
-  },
-};
-
-export const gameReducer = (state, action) => {
+const pageReducer = (state=initialState, action) => {
   switch (action.type) {
-    case 'ADD_SYMBOL':
-      const {symbol, row, position} = action;
-      const newState = _.cloneDeep(state);
-      newState.board[row][position] = symbol;
-
-      const xResult = resultForSymbol(X, newState.board);
-      const oResult = resultForSymbol(O, newState.board);
-
-      if (xResult.won) {
-        newState.won = X;
-        newState.wonLine = xResult.line;
-      }
-
-      if (oResult.won) {
-        newState.won = O;
-        newState.wonLine = oResult.line;
-      }
-
-      if (!newState.won) {
-        newState.turn = newState.turn === O ? X : O;
-      }
-
-      const boardIsFull = [
-        ...newState.board[0],
-        ...newState.board[1],
-        ...newState.board[2]
-      ]
-        .filter(symbol => symbol !== '')
-        .length === 9;
-
-      if (boardIsFull && !newState.won) {
-        newState.draw = true;
-      }
-
-      return newState;
-    case 'START_AGAIN':
-      return initialState;
+    case "CELLPOSITION":
+      return initialState
+    case "PAGE2":
+      return { ...state, responseData: action.payload};
+    case "PAGE3":
+      return { ...state, responseData: action.payload};
     default:
       return state;
   }
 };
+
+export default pageReducer;

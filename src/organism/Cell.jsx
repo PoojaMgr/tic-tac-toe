@@ -1,16 +1,8 @@
-import { useEffect } from 'react';
 import "./Cell.css";
 
-export default function Cell({ value, handleClick }) {
-    useEffect(() => {
-        let div = document.getElementsByClassName("content-cell")[0];
-        div.addEventListener("click", function (event) {
-          alert("Hi!");
-        });
-    })
-
+export default function Cell({ value, handleClick, xIsNext }) {
   return (
-    <div className="content-cell" onClick={handleClick}>
+    <div className={`content-cell ${xIsNext ? 'x_style': 'o_style'}`} onClick={handleClick}>
       {value}
     </div>
   );

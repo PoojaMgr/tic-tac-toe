@@ -1,62 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Cell from "../organism/Cell";
 import "./MainContent.css";
+import { X, O } from "../constant";
+import { calculateWinner } from "../helper/calculateWinner";
+import { cellposition } from "../redux/action";
 
 export default function MainContent() {
   const [cellPosition, setCellPosition] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(false);
-  let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [winnerStatus, setWinnerStatus] = useState("");
+  let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  const pagedata = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const handleClick = (i) => {
-    debugger;
     const cell = cellPosition.slice();
+    cell[i] = xIsNext ? X : O;
+    setCellPosition(cell);
+    dispatch(cellposition(cell));
+    setXIsNext(!xIsNext);
     if (calculateWinner(cellPosition) || cellPosition[i]) {
       return;
     }
-    cell[i] = xIsNext ? "X" : "O";
-    setCellPosition(cell);
-    setXIsNext(!xIsNext);
   };
-  const calculateWinner = (cellPosition) => {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (
-        cellPosition[a] &&
-        cellPosition[a] === cellPosition[b] &&
-        cellPosition[a] === cellPosition[c]
-      ) {
-        return cellPosition[a];
-      }
-    }
-    return null;
-  };
-
+useEffect(() => {
   const winner = calculateWinner(cellPosition);
-  let status;
   if (winner) {
-    status = "Winner: " + winner;
-  } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    setWinnerStatus(winner);
   }
-  console.log(winner, 'winner')
+}, [cellPosition])
+  
   return (
     <div className="mainContent">
       {arr.map((index) => (
-          <Cell
-            value={cellPosition[index]}
-            handleClick={() => handleClick(index)}
-          />
+        <Cell
+          value={cellPosition[index]}
+          handleClick={() => handleClick(index)}
+          xIsNext={xIsNext}
+        />
       ))}
+
+     { winnerStatus && <div id="myModal" className="winning-message">
+      <div className="winning-content">
+        <span className="close">&times;</span>
+        <p>{winnerStatus === "O" ? `Player 1` : `Player 2`} won!</p>
+      </div>
+    </div>}
     </div>
   );
 }
